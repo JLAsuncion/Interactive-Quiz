@@ -15,93 +15,51 @@
         
 
 body {
-
-  margin: 0;
-
   font-family: Arial, sans-serif;
-
+  background-color: #1b2036ef;
 }
-
-
 
 #quiz-container {
-
-  max-width: 600px;
-
+  width: 600px;
   margin: 50px auto;
-
   padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  border: 1px solid #ddd;
-
-  background-color: #f9f9f9;
-
+h1 {
   text-align: center;
-
+  color: black;
 }
 
-
-
-#question {
-
-  margin-bottom: 20px;
-
+p {
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
 }
 
-
-
-#options{
-
-  display: block;
-
+button {
   width: 100%;
-
-  padding: 10px;
-
-  margin-bottom: 10px;
-
-  border: 1px solid #ddd;
-
-  background-color: #fff;
-
+  height: 40px;
+  border: none;
+  outline: none;
   cursor: pointer;
-
+  font-size: 16px;
+  margin: 5px 0;
 }
 
-
-
-#options:hover {
-
-  background-color: lightcoral;
-
+button:hover {
+  background-color: black;
+  color: white;
 }
-
-
 
 #next-button {
-
+  width: 150px;
+  margin: 20px auto;
   display: block;
-
-  padding: 10px 20px;
-
-  background-color: #007bff;
-
+  background-color: black;
   color: white;
-
-  border: none;
-
-  cursor: pointer;
-
 }
-
-
-
-#next-button:hover {
-
-  background-color: #0056b3;
-
-}
-
 
 
     </style>
@@ -109,10 +67,6 @@ body {
 </head>
 
 <body>
-
-    <body>
-
-
 
         <div id="quiz-container">
 
@@ -122,41 +76,32 @@ body {
 
             <div id="options"></div>
 
-
-
             <button id="next-button" onclick="nextQuestion()" >Next Question</button>
+            
+            
+
 
         </div>
-
-    
-
     <script>
+        const quizData = [
+  {
+    question: "What is En passant? ",
+    options: ["Bread", "Pasta", "Pizza", "a special chess rule that gives pawns the option to capture a pawn which has just passed it"],
+    correctAnswer: "a special chess rule that gives pawns the option to capture a pawn which has just passed it",
+  },
+  {
+    question: "What happened in September 20, 2019?",
+    options: ["Storm Area 51", "Moon eclipse", "Pandemic", "None"],
+    correctAnswer: "Storm Area 51",
+  }, 
+  {
+  question: "Which game won Game of the Year 2022?",
+  options: ["God of War Ragnarok", "Elden Ring", "Genshin Impact", "Fortnite"],
+  correctAnswer: "Elden Ring",
+  },
+];
 
-            const quizData = [
-
-                {
-
-    
-
-              question: '1 + 1 is equal to? ',
-
-              options: ['2', '1'],
-
-              correctAnswer: '2',
-
-
-
-    
-
-      },
-
-            ];
-
-      
-
-     let currentQuestionIndex = 0;
-
-
+let currentQuestionIndex = 0;
 
      function displayQuestion() {
 
@@ -166,19 +111,13 @@ body {
 
         const currentQuestion = quizData[currentQuestionIndex];
 
-
-
         questionElement.textContent = currentQuestion.question;
 
         optionsElement.innerHTML = '';
 
-
-
         currentQuestion.options.forEach(option => {
 
             const button = document.createElement('button');
-
-
 
             button.textContent = option;
 
@@ -193,57 +132,44 @@ body {
         });
 
     }
+    
+const nextButton = document.getElementById("next-button");
 
 
+function checkAnswer(userAnswer) {
+  const currentQuestion = quizData[currentQuestionIndex];
 
-    function checkAnswer(userAnswer){
+  if (userAnswer === currentQuestion.correctAnswer) {
+    alert("Correct!");
+  } else {
+    alert("Incorrect. The correct answer is: " + currentQuestion.correctAnswer);
+  }
 
-        const currentQuestion = quizData[currentQuestionIndex];
+  
+  nextButton.disabled = false;
 
+}
 
-
-        if (userAnswer === currentQuestion.correctAnswer) {
-
-            alert("Correct!");
-
-        } else {
-
-            alert("Wrong Answer");
-
-        }
-
-        
-
-        currentQuestionIndex++;
-
-
-
-        if (currentQuestionIndex < quizData.length) {
-
-            displayQuestion();
-
-        } else {
-
-            alert("Quiz Completed");
-
-        }
-
-
-
-    }
+function nextQuestion() {
+ 
+  if (currentQuestionIndex < quizData.length - 1) {
+    
+    currentQuestionIndex++;
+  
+    displayQuestion();
+   
+    nextButton.disabled = true;
+  } else {
+    
+    alert("Quiz Completed");
+  }
+}
 
 
 
 displayQuestion();
 
-
-
-
-
-
-     
-
-     
+            
 
      </script>
 
