@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interactive Quiz</title>
+
+    <style>
+
+        
+
+body {
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+}
+
+
+
+#quiz-container {
+
+  max-width: 600px;
+
+  margin: 50px auto;
+
+  padding: 20px;
+
+  border: 1px solid #ddd;
+
+  background-color: #f9f9f9;
+
+  text-align: center;
+
+}
+
+
+
+#question {
+
+  margin-bottom: 20px;
+
+}
+
+
+
+#options{
+
+  display: block;
+
+  width: 100%;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid #ddd;
+
+  background-color: #fff;
+
+  cursor: pointer;
+
+}
+
+
+
+#options:hover {
+
+  background-color: lightcoral;
+
+}
+
+
+
+#next-button {
+
+  display: block;
+
+  padding: 10px 20px;
+
+  background-color: #007bff;
+
+  color: white;
+
+  border: none;
+
+  cursor: pointer;
+
+}
+
+
+
+#next-button:hover {
+
+  background-color: #0056b3;
+
+}
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <body>
+
+
+
+        <div id="quiz-container">
+
+            <h1>Interactive Quiz</h1>
+
+            <p id="question"></p>
+
+            <div id="options"></div>
+
+
+
+            <button id="next-button" onclick="nextQuestion()" >Next Question</button>
+
+        </div>
+
+    
+
+    <script>
+
+            const quizData = [
+
+                {
+
+    
+
+              question: '1 + 1 is equal to? ',
+
+              options: ['2', '1'],
+
+              correctAnswer: '2',
+
+
+
+    
+
+      },
+
+            ];
+
+      
+
+     let currentQuestionIndex = 0;
+
+
+
+     function displayQuestion() {
+
+        const questionElement = document.getElementById('question');
+
+        const optionsElement = document.getElementById('options');
+
+        const currentQuestion = quizData[currentQuestionIndex];
+
+
+
+        questionElement.textContent = currentQuestion.question;
+
+        optionsElement.innerHTML = '';
+
+
+
+        currentQuestion.options.forEach(option => {
+
+            const button = document.createElement('button');
+
+
+
+            button.textContent = option;
+
+            button.onclick = function() {
+
+                checkAnswer(option);
+
+            };
+
+            optionsElement.appendChild(button);
+
+        });
+
+    }
+
+
+
+    function checkAnswer(userAnswer){
+
+        const currentQuestion = quizData[currentQuestionIndex];
+
+
+
+        if (userAnswer === currentQuestion.correctAnswer) {
+
+            alert("Correct!");
+
+        } else {
+
+            alert("Wrong Answer");
+
+        }
+
+        
+
+        currentQuestionIndex++;
+
+
+
+        if (currentQuestionIndex < quizData.length) {
+
+            displayQuestion();
+
+        } else {
+
+            alert("Quiz Completed");
+
+        }
+
+
+
+    }
+
+
+
+displayQuestion();
+
+
+
+
+
+
+     
+
+     
+
+     </script>
+
+</body>
+
+</html>
